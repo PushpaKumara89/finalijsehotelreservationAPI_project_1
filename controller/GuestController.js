@@ -7,7 +7,6 @@ const jwt = require('jsonwebtoken');
 
 
 const Register = (req, resp) => {
-    console.log(req)
     bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
         const guest = new Guest({
             name: req.body.name,
@@ -68,7 +67,6 @@ const SignIn = (req, resp) => {
 }
 
 const getOne = (req, resp) => {
-    console.log(req.headers)
     Guest.findOne({email: req.headers.email}).then(response => {
         if (response === null) {
             resp.status(400).json({state: false, message: 'Empty Result..'});

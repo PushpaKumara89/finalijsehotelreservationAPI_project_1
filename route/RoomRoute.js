@@ -7,6 +7,7 @@ route.put('/updateRoom', RoomController.updateRoom);
 route.delete('/deleteRoom', RoomController.deleteRoom);
 route.get('/searchRoom', RoomController.searchRoom);
 route.get('/getAllRoom', RoomController.getAllRoom);
+route.put('/saveRoomImages', RoomController.imageUpload);
 
 module.exports = route;
 

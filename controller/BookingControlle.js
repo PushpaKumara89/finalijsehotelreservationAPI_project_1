@@ -15,7 +15,6 @@ const checkInRoom = async (req, resp) => {
 
     Room.findOne({room_number: req.body.room_number}).then(room => {
         booking.room = room;
-        console.log(room)
 
 
     }).then(Guest.findOne({email: req.body.email}).then(guest => {
@@ -64,15 +63,32 @@ const getA_booking = (req, resp) => {
 }
 
 const bookingCancel = (req, resp) => {
+    Booking.deleteOne({_id: req.headers._id}).then(response => {
+        if (response.deletedCount > 0) {
+            resp.status(201).json({status: true, massage: 'Canceled..'});
+        } else {
+            resp.status(400).json({status: true, massage: 'Try Again..'});
+        }
+    }).catch(error => {
+        resp.status(500).json({status: false, massage: 'Try Again..'});
+    })
 }
 
 const getCart = (req, resp) => {
-    console.log(req.headers.email)
     Booking.find().then(response => {
         if(response===null){
             resp.status(400).json({status: false, massage: 'Empty Result'});
         }else {
-            resp.status(201).json({status: true, data: response});
+            let temp=[];
+            let data =[];
+            temp=response;
+            for (let i = 0; i < temp.length; i++) {
+                if(String(temp[i].guest.email)===String(req.headers.email)){
+                    data.push(temp[i]);
+                }
+
+            }
+            resp.status(201).json({status: true, data: data});
         }
     })
 }
