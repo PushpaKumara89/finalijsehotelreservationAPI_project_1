@@ -31,8 +31,8 @@ app.get('',(req,res,next)=>{
     res.json('hello world')
 })
 
-
-mongoose.connect('mongodb://localhost:27017/marina'/*'MONGO_URL=mongodb+srv://user-root:1234@studentmanagement.koadk.mongodb.net/hotel_marina'*/).then(() => {
+/*'mongodb://localhost:27017/marina'*/
+mongoose.connect('MONGO_URL=mongodb+srv://user-root:1234@studentmanagement.koadk.mongodb.net/hotel_marina').then(() => {
     app.listen(PORT, () => {
         console.log(`api  up and running ${PORT}`);
     });
