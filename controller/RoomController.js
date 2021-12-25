@@ -6,7 +6,7 @@ const addRoom = (req, resp) => {
         room_category: req.body.room_category,
         price_per_night: req.body.price_per_night,
         description: req.body.description,
-        image:{status:false,image:['./assets/imgno.jpg']}//image not uploaded
+        image:{status:false,image:['/images/assets/imgno.jpg']}//image not uploaded
 
     });
     Room.findOne({room_number: req.body.room_number}).then(response => {

@@ -27,8 +27,12 @@ app.use(bodyParser.urlencoded({extended: false}))
 // parse application/json
 app.use(bodyParser.json())
 
+app.get('',(req,res,next)=>{
+    res.json('hello world')
+})
 
-mongoose.connect('mongodb://localhost:27017/marina').then(() => {
+
+mongoose.connect('mongodb://localhost:27017/marina'/*'MONGO_URL=mongodb+srv://user-root:1234@studentmanagement.koadk.mongodb.net/hotel_marina'*/).then(() => {
     app.listen(PORT, () => {
         console.log(`api  up and running ${PORT}`);
     });

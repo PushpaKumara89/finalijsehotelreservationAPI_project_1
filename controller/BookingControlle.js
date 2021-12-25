@@ -23,7 +23,7 @@ const checkInRoom = async (req, resp) => {
 
         }).then(() => {
             booking.save().then(response => {
-                resp.status(201).json({state: true, message: 'saved..'});
+                resp.status(201).json({status:true, message: 'saved..'});
 
             }).catch(error => {
                 resp.status(500).json(error);
@@ -53,8 +53,17 @@ const getA_booking = (req, resp) => {
         }else {
             resp.status(200).json({state: false, data: {
                 _id:response._id,start_date:response.start_date,end_date:response.end_date,
-                    guest:{name:response.guest.name,contact_number:response.guest.contact_number,address:response.guest.address,email:response.guest.email},
-                    room:{room_number:response.room.room_number,room_category: response.room.room_category,price_per_night: response.room.price_per_night,description:response.room.description}
+                    guest:{
+                        name:response.guest.name,
+                        contact_number:response.guest.contact_number,
+                        address:response.guest.address,
+                        email:response.guest.email
+                    },
+                    room:{room_number:response.room.room_number,
+                        room_category: response.room.room_category,
+                        price_per_night: response.room.price_per_night,
+                        description:response.room.description
+                    }
                 }});
         }
     }).catch(error=>{
@@ -86,7 +95,6 @@ const getCart = (req, resp) => {
                 if(String(temp[i].guest.email)===String(req.headers.email)){
                     data.push(temp[i]);
                 }
-
             }
             resp.status(201).json({status: true, data: data});
         }
