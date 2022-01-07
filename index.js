@@ -11,6 +11,7 @@ const UserRoute = require('./route/UserRoute');
 const RoomRoute = require('./route/RoomRoute');
 const imagRoute = require('./route/ImageRoute');
 const BookingRoute = require('./route/BookingRoute');
+const fs = require('./route/fsRoute')
 
 
 const PORT = process.env.SERVER_PORT;
@@ -32,7 +33,7 @@ app.get('',(req,res,next)=>{
 })
 
 /*'mongodb://localhost:27017/marina'*/
-mongoose.connect('MONGO_URL=mongodb+srv://user-root:1234@studentmanagement.koadk.mongodb.net/hotel_marina').then(() => {
+mongoose.connect('mongodb://localhost:27017/marina'/*'MONGO_URL=mongodb+srv://user-root:1234@studentmanagement.koadk.mongodb.net/hotel_marina'*/).then(() => {
     app.listen(PORT, () => {
         console.log(`api  up and running ${PORT}`);
     });
@@ -48,6 +49,7 @@ app.use('/images', express.static('upload/images'));
 app.use('/api/v1/imageupload', imagRoute);
 app.use('/api/v1/room', RoomRoute);
 app.use('/api/v1/booking', BookingRoute);
+app.use('/api/v1/fileDelete',fs);
 
 /*http://localhost:3000/api/v1/room*/
 

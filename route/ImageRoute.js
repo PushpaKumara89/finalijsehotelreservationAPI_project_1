@@ -19,7 +19,7 @@ const upload = multer({
 const route = express.Router();
 route.post('/singlupload', upload.single('profile'), (req, resp) => {
 
-    resp.status(201).json({status: true, url:`/images/${req.file.filename}`});
+    resp.status(201).json({status: true, url:req.file.filename});
 
 
     // resp.status(201).json({status: true, url: `http://localhost:3000/images/${req.file.filename}`});
@@ -34,7 +34,7 @@ route.post('/multipulImage', upload.array('array', 10), function (req, res, next
 
     const file_names = [];
     for (let i = 0; i < req.files.length; i++) {
-        file_names.push('/images/' + req.files[i]['filename'])
+        file_names.push(req.files[i]['filename'])
     }
 
     res.status(201).json({data: {file_names}});

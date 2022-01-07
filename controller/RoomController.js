@@ -6,7 +6,7 @@ const addRoom = (req, resp) => {
         room_category: req.body.room_category,
         price_per_night: req.body.price_per_night,
         description: req.body.description,
-        image:{status:false,image:['/images/assets/imgno.jpg']}//image not uploaded
+        image:{status:false,image:['assets/imgno.jpg']}//image not uploaded
 
     });
     Room.findOne({room_number: req.body.room_number}).then(response => {
@@ -57,12 +57,14 @@ const updateRoom = (req, resp) => {
 }
 
 const imageUpload = (req, resp) => {
-    if(req.body.image.data=== undefined){
+    console.log(req.body.image)
+    if(req.body.image=== undefined){
         return;
     }
     Room.updateOne({room_number: req.body.room_number}, {
         $set: {
-            image:{status:true,image:req.body.image.data.file_names},
+
+            image: {status:true,image:req.body.image.data.file_names}
 
         }
     }).then(response => {
