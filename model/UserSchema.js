@@ -20,7 +20,10 @@ const UserSchema = new mongoose.Schema({
         required: true
     },
     avatar: {
-        type: Object,
+        type: Object
+    },
+    gallery:{
+        type:Array
     }
 });
 module.exports = mongoose.model('user', UserSchema);

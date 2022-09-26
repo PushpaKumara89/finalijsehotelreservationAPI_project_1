@@ -16,20 +16,19 @@ const upload = multer({
 
 })
 
+
+
 const route = express.Router();
-route.post('/singlupload', upload.single('profile'), (req, resp) => {
+route.post('/singlupload', upload.single('single'), (req, resp) => {
+    console.log(resp);
 
     resp.status(201).json({status: true, url:req.file.filename});
-
-
-    // resp.status(201).json({status: true, url: `http://localhost:3000/images/${req.file.filename}`});
-
 });
+
 
 route.post('/multipulImage', upload.array('array', 10), function (req, res, next) {
     if (next()) {
-        console.log('next');
-        console.log(next);
+
     }
 
     const file_names = [];

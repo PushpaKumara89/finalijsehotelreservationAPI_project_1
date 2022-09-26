@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
 app.get('',(req,res,next)=>{
-    res.json('hello world')
+    res.json('hello world');
 })
 
 /*'mongodb://localhost:27017/marina'*/

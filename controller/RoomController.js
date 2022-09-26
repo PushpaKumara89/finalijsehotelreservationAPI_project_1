@@ -15,7 +15,6 @@ const addRoom = (req, resp) => {
                 resp.status(201).json({status: true, massage: 'Saved..'});
             }).catch(error => {
                 resp.status(500).json({status: false, massage: 'Try Again..'});
-                console.log(error)
             })
         } else {
             resp.status(400).json({state: false, message: 'Already Exists..'});
@@ -48,7 +47,6 @@ const updateRoom = (req, resp) => {
         if (response.modifiedCount > 0) {
             resp.status(201).json({status: true, massage: 'Update..'});
         } else {
-            console.log(req);
             resp.status(400).json({status: true, massage: 'Try Again..'});
         }
     }).catch(error => {
@@ -57,21 +55,18 @@ const updateRoom = (req, resp) => {
 }
 
 const imageUpload = (req, resp) => {
-    console.log(req.body.image)
     if(req.body.image=== undefined){
         return;
     }
     Room.updateOne({room_number: req.body.room_number}, {
         $set: {
-
-            image: {status:true,image:req.body.image.data.file_names}
+            image: {status:true,image:req.body.image}
 
         }
     }).then(response => {
         if (response.modifiedCount > 0) {
             resp.status(201).json({status: true, massage: 'Save Success..'});
         } else {
-            console.log('req');
             resp.status(400).json({status: true, massage: 'Try Again..'});
         }
     }).catch(error => {
@@ -81,13 +76,13 @@ const imageUpload = (req, resp) => {
 
 const searchRoom = (req, resp) => {
     Room.findOne({room_number: req.headers.room_number}).then(response => {
-        if (response === null) {
-            resp.status(400).json({status: false, message: 'Empty Result..'});
-        } else {
-            resp.status(200).json({status: true, data: response});
+        if(response === null){
+            resp.status(400).json({status: false, massage: 'Empty Result'});
+        }else {
+            resp.status(201).json({status: true, data: response});
         }
     }).catch(error => {
-        resp.status(500).json({status: false, message: 'Try Again..'});
+        resp.status(500).json({state: false, message: 'Try Again..'});
     })
 }
 
@@ -103,8 +98,5 @@ const getAllRoom = (req, resp) => {
     })
 
 }
-
-
-
 
 module.exports = {addRoom, updateRoom, deleteRoom, searchRoom, getAllRoom, imageUpload};
