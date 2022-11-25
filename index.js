@@ -32,15 +32,15 @@ app.get('',(req,res,next)=>{
     res.json('hello world');
 })
 
-/*'mongodb://localhost:27017/marina'*/
-mongoose.connect('mongodb://localhost:27017/marina'/*'MONGO_URL=mongodb+srv://user-root:1234@studentmanagement.koadk.mongodb.net/hotel_marina'*/).then(() => {
+/*'mongodb://localhost:27017/marina'*///for node 16 below versions
+/*'mongodb://0.0.0.0:27017/marina'*///for node 16 upto versions
+mongoose.connect('mongodb://localhost:27017/marina').then(() => {
     app.listen(PORT, () => {
-        console.log(`api  up and running ${PORT}`);
+        console.log(`api  up and  running ${PORT}`);
     });
 }).catch(error => {
     console.log(error);
 });
-
 
 //link export ....................
 app.use('/api/v1/guest', GuestRoute);
